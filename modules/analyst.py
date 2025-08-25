@@ -52,7 +52,6 @@ def show(conn):
         visualizer.show(df_selected, title="📊 Analyst Visualization", key="analyst")
         st.markdown("#### Insights")
         st.write(df_selected.describe(include="all"))
-
     else:
         st.info("No table selected.")
 
@@ -62,4 +61,5 @@ def show(conn):
             navigate_to("Cleaner & Query")
     with col_next:
         if st.button("Next →"):
+            navigate_to("Reset")
             navigate_to("Reset")

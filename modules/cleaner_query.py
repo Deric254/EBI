@@ -52,7 +52,8 @@ def show(conn):
                     st.session_state["selected_table"] = tables[0]
                 else:
                     st.session_state.pop("selected_table", None)
-                st.rerun()  # Use st.rerun() for immediate rerun, not st.experimental_rerun()
+                # Remove st.rerun() or st.experimental_rerun()
+                # User must manually select next table or refresh
             except Exception as e:
                 st.error(f"Error deleting table: {e}")
     with col2:

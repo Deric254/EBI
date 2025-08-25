@@ -1,0 +1,51 @@
+Emp ID,Name,Gender,Department,Salary,Salary Bucket,Start Date,Employee type,Work location,Work Type
+PR00007,Torrance,Female,Training,96136.0,50k to 100k,07/13/2020,Permanent,Wellington,Part time
+PR00095,Devrat,Female,Business,70649.0,50k to 100k,01/13/2020,Permanent,Hyderabad,Full time
+PR00113,Van,Female,Business,80696.0,50k to 100k,09/17/2018,Permanent,Columbus,Full time
+PR00113,Van,Female,Business,85000.0,50k to 100k,09/17/2018,Permanent,Columbus,Full time
+PR00147,Minerva,Male,Engineering,120000.0,Above 100k,11/12/2018,Permanent,Remote,Full time
+PR00246,Husein,Female,Marketing,67906.0,50k to 100k,12/29/2020,Permanent,Remote,Full time
+PR00419,Billi,Female,Business,68981.0,50k to 100k,01/29/2019,Permanent,Remote,Part time
+PR00576,Lalitchandra,Female,Legal,63705.0,50k to 100k,08/05/2019,Permanent,Hyderabad,Full time
+PR00746,Hogan,Female,Accounting,114177.0,Above 100k,03/18/2020,Permanent,Wellington,Full time
+PR00770,Beryl,Male,Legal,29775.0,Under 50k,10/01/2020,Permanent,Wellington,Full time
+PR00882,Jill,Male,Accounting,52964.0,50k to 100k,04/02/2021,Permanent,Columbus,Part time
+PR00893,Vasavi,Male,Human,50310.0,50k to 100k,03/30/2021,Permanent,Hyderabad,Part time
+PR00916,Inger,Female,Research,84310.0,50k to 100k,11/01/2021,Permanent,Remote,Full time
+PR01055,Devasree,Male,Accounting,35936.0,Under 50k,05/21/2018,Permanent,Chennai,Full time
+PR01159,Mollie,Male,Engineering,112646.0,Above 100k,10/21/2019,Permanent,Seattle,Part time
+PR01211,Enoch,Male,Accounting,91645.0,50k to 100k,01/27/2021,Permanent,Auckland,Full time
+PR01269,Eleonore,Female,Engineering,97105.0,50k to 100k,08/17/2021,Permanent,Columbus,Full time
+PR01306,Patti,Male,Services,84743.0,50k to 100k,09/24/2020,Permanent,Auckland,Full time
+PR01346,Adolph,Male,Business,85919.0,50k to 100k,02/05/2018,Permanent,Columbus,Full time
+PR01383,Addi,Female,Product,72503.0,50k to 100k,02/08/2021,Permanent,Wellington,Full time
+PR01476,Jaishree,Male,Services,77096.0,50k to 100k,04/27/2018,Permanent,Chennai,Full time
+PR01662,Genevra,Female,Research,50449.0,50k to 100k,11/14/2018,Permanent,Auckland,Part time
+PR01943,Rameshwari,Male,Human,48526.0,Under 50k,06/13/2018,Permanent,Hyderabad,Full time
+PR01956,Jamesy,Male,Accounting,36548.0,Under 50k,11/12/2018,Permanent,Remote,Full time
+PR01956,Jamesy,Male,Accounting,36548.0,Under 50k,11/12/2018,Permanent,Remote,Full time
+PR02010,Prerana,Male,Product,115191.0,Above 100k,06/22/2020,Permanent,Hyderabad,Full time
+PR02016,Iris,Female,Engineering,58861.0,50k to 100k,07/08/2019,Permanent,Columbus,Full time
+PR02113,Beverie,Female,Support,75975.0,50k to 100k,12/07/2020,Permanent,Remote,Full time
+PR02140,Anjushri,Male,Accounting,95954.0,50k to 100k,04/12/2019,Permanent,Hyderabad,Part time
+PR02208,Gowri,Female,Training,102934.0,Above 100k,04/29/2021,Permanent,Hyderabad,Full time
+PR02275,Louise,Female,Sales,41935.0,Under 50k,11/11/2019,Permanent,Remote,Full time
+PR02288,Althea,Male,Product,104335.0,Above 100k,02/13/2020,Permanent,Columbus,Full time
+PR02321,Evanne,Female,Services,81898.0,50k to 100k,02/15/2018,Permanent,Auckland,Full time
+PR02436,Marmaduke,Female,Engineering,78378.0,50k to 100k,12/31/2018,Permanent,Remote,Part time
+PR02603,Dinanath,Female,Human,61995.0,50k to 100k,11/25/2019,Permanent,Hyderabad,Part time
+PR02782,Isaak,Male,Marketing,37362.0,Under 50k,06/26/2019,Permanent,Auckland,Full time
+PR02957,Vaughn,Female,Training,84746.0,50k to 100k,08/30/2019,Permanent,Wellington,Full time
+PR03034,Sreenivasa,Male,Sales,32192.0,Under 50k,10/04/2021,Permanent,Hyderabad,Full time
+PR03137,Jagajeet,Male,Support,36714.0,Under 50k,12/10/2020,Permanent,Chennai,Full time
+PR03158,Danica,Female,Services,89690.0,50k to 100k,04/16/2018,Permanent,Wellington,Full time
+PR03271,Stan,Female,Sales,39535.0,Under 50k,10/24/2018,Permanent,Remote,Part time
+PR03445,Myrle,Male,Sales,62195.0,50k to 100k,08/26/2021,Permanent,Remote,Full time
+PR03532,Crawford,Male,Human,72877.0,50k to 100k,01/07/2020,Permanent,Remote,Full time
+PR03804,Pratigya,Male,Legal,66573.0,50k to 100k,12/28/2020,Permanent,Chennai,Full time
+PR03804,Sartaj,Male,Legal,66573.0,50k to 100k,12/28/2020,Permanent,Chennai,Full time
+PR03844,Brose,Female,Human,35944.0,Under 50k,09/04/2020,Permanent,Columbus,Full time
+PR03886,Edd,Male,Accounting,119022.0,Above 100k,08/23/2021,Permanent,Auckland,Full time
+PR03980,Kath,Male,Marketing,65699.0,50k to 100k,04/30/2020,Permanent,Columbus,Full time
+PR04366,Carry,Female,Sales,47552.0,Under 50k,01/03/2019,Permanent,Auckland,Full time
+PR04380,Van,Female,Business,80696.0,50k to 100k,11/18/2019,Permanent,Columbus,Part time
