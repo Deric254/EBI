@@ -305,4 +305,5 @@ elif page == "My Projects":
     my_projects.show()
 
 # Footer
+#testing streamlit tracking mechanism
 #st.markdown("<div class='footer-text'>© 2025 EXES Intelligence — We analyze, you decide</div>", unsafe_allow_html=True)
