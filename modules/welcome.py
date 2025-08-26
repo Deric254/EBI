@@ -1,6 +1,9 @@
 import streamlit as st
 from utils import navigate_to
 
+def bold_green(msg):
+    st.markdown(f"<span style='font-weight:bold;color:#198754;'>{msg}</span>", unsafe_allow_html=True)
+
 def show():
     st.subheader("🧭 Welcome to EBI")
     st.markdown("""
@@ -14,9 +17,6 @@ def show():
     Built for analysts and admins.  
     Visit [EXES Analytics](https://deric-exes-analytics.netlify.app) to learn more.
     """)
-
-   # if st.button("Home"):
-     #   navigate_to("Welcome")
     if st.button("Start →"):
         navigate_to("Navigator")
     #if st.button("Reset →"):

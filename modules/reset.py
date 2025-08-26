@@ -1,6 +1,9 @@
 import streamlit as st
 from utils import navigate_to
 
+def bold_green(msg):
+    st.markdown(f"<span style='font-weight:bold;color:#198754;'>{msg}</span>", unsafe_allow_html=True)
+
 def show():
     st.subheader("🔄 Reset Session")
     st.markdown("Use this to restart your workflow from the beginning.")
@@ -13,6 +16,6 @@ def show():
         if st.button("Reset All"):
             for key in list(st.session_state.keys()):
                 del st.session_state[key]
-            st.success("Session reset. Please reload or start from Welcome.")
+            bold_green("Session reset. Please reload or start from Welcome.")
 
     st.markdown("Visit [EXES Analytics](https://deric-exes-analytics.netlify.app) to explore more tools.")

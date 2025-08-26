@@ -3,6 +3,9 @@ import pandas as pd
 from utils import navigate_to
 from modules import visualizer
 
+def bold_green(msg):
+    st.markdown(f"<span style='font-weight:bold;color:#198754;'>{msg}</span>", unsafe_allow_html=True)
+
 def show(conn):
     # Make all Streamlit notifications bold green
     st.markdown(
@@ -32,19 +35,19 @@ def show(conn):
         # Check if we have a cleaned DataFrame in session state
         if "cleaned_df" in st.session_state:
             df = st.session_state.cleaned_df
-            st.success(f"Using cleaned dataset with {df.shape[1]} columns and {df.shape[0]} rows")
+            bold_green(f"Using cleaned dataset with {df.shape[1]} columns and {df.shape[0]} rows")
         else:
             # Fall back to loading from database if no cleaned DataFrame is available
             cursor.execute(f"SELECT * FROM '{table}' LIMIT 1000")
             rows = cursor.fetchall()
             cols = [desc[0] for desc in cursor.description]
             df = pd.DataFrame(rows, columns=cols)
-            st.info("Using original dataset (no cleaned version found)")
+            bold_green("Using original dataset (no cleaned version found)")
 
         st.markdown("### Select Columns to Visualize")
         selected_cols = st.multiselect("Columns", df.columns.tolist(), default=df.columns.tolist())
         if not selected_cols:
-            st.warning("Please select at least one column.")
+            bold_green("Please select at least one column.")
             return
 
         df_selected = df[selected_cols]
@@ -53,7 +56,7 @@ def show(conn):
         st.markdown("#### Insights")
         st.write(df_selected.describe(include="all"))
     else:
-        st.info("No table selected.")
+        bold_green("No table selected.")
 
     col_back, col_next = st.columns([1, 1], gap="small")
     with col_back:

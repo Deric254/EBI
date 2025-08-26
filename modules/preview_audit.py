@@ -4,6 +4,9 @@ from utils import navigate_to
 import os
 from datetime import datetime
 
+def bold_green(msg):
+    st.markdown(f"<span style='font-weight:bold;color:#198754;'>{msg}</span>", unsafe_allow_html=True)
+
 def show(conn):
     cursor = conn.cursor()
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name")
@@ -12,7 +15,7 @@ def show(conn):
     table = current_table
 
     if not table:
-        st.warning("Please select a table first.")
+        bold_green("Please select a table first.")
         return
 
     st.subheader(f"🔍 Preview & Audit `{table}`")
@@ -35,7 +38,7 @@ def show(conn):
         json_path = os.path.join(files_dir, f"{table}_{timestamp}.json")
         df.to_csv(csv_path, index=False)
         df.to_json(json_path, orient="records")
-        st.success(f"CSV and JSON saved to My Projects.")
+        bold_green("CSV and JSON saved to My Projects.")
 
         cursor.execute(f"PRAGMA table_info('{table}')")
         schema = cursor.fetchall()
@@ -56,6 +59,4 @@ def show(conn):
                 navigate_to("Cleaner & Query")
 
     except Exception as e:
-        st.error(f"Error previewing/auditing: {e}")
-        st.error(f"Error previewing/auditing: {e}")
-        st.error(f"Error previewing/auditing: {e}")
+        bold_green(f"Error previewing/auditing: {e}")

@@ -1,6 +1,9 @@
 import streamlit as st
 from utils import navigate_to
 
+def bold_green(msg):
+    st.markdown(f"<span style='font-weight:bold;color:#198754;'>{msg}</span>", unsafe_allow_html=True)
+
 def show(conn):
     st.subheader("📂 Data Navigator")
 
@@ -17,13 +20,11 @@ def show(conn):
             selected_table = st.selectbox("Select a table", filtered_tables)
             st.session_state["selected_table"] = selected_table
 
-        # Show columns for selected table
         cursor.execute(f"PRAGMA table_info('{selected_table}')")
         columns = cursor.fetchall()
         with st.expander("📌 Table Columns"):
             st.write(columns)
 
-        # Strategic points for Insert CSV and Generate Data
         st.markdown("#### Table Actions")
         col_insert, col_generate = st.columns([1, 1])
         with col_insert:
@@ -44,4 +45,4 @@ def show(conn):
                 navigate_to("Welcome")
 
     except Exception as e:
-        st.error(f"Error navigating: {e}")
+        bold_green(f"Error navigating: {e}")

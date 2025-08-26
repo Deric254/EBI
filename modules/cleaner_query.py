@@ -9,6 +9,9 @@ import pandas as pd
 import numpy as np
 from utils import navigate_to
 
+def bold_green(msg):
+    st.markdown(f"<span style='font-weight:bold;color:#198754;'>{msg}</span>", unsafe_allow_html=True)
+
 def show(conn):
     # Make all Streamlit notifications (info/success/warning/error) bold green without changing logic
     st.markdown(
@@ -31,7 +34,7 @@ def show(conn):
     table = current_table
 
     if not table:
-        st.warning("Please select a table first.")
+        bold_green("Please select a table first.")
         return
 
     st.subheader(f"🧹 Cleaner & Query for `{table}`")
@@ -45,7 +48,7 @@ def show(conn):
             try:
                 cursor.execute(f"DROP TABLE IF EXISTS '{table}'")
                 conn.commit()
-                st.success(f"Table '{table}' deleted.")
+                bold_green(f"Table '{table}' deleted.")
                 cursor.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name")
                 tables = [row[0] for row in cursor.fetchall()]
                 if tables:
@@ -55,21 +58,20 @@ def show(conn):
                 # Remove st.rerun() or st.experimental_rerun()
                 # User must manually select next table or refresh
             except Exception as e:
-                st.error(f"Error deleting table: {e}")
+                bold_green(f"Error deleting table: {e}")
     with col2:
         new_name = st.text_input("Rename table to:", value=table, key="rename_table", placeholder="Enter new table name")
         if st.button("Rename Table"):
             try:
                 cursor.execute(f"ALTER TABLE '{table}' RENAME TO '{new_name}'")
                 conn.commit()
-                st.success(f"Table '{table}' renamed to '{new_name}'.")
+                bold_green(f"Table '{table}' renamed to '{new_name}'.")
                 st.session_state["selected_table"] = new_name
                 # Refresh table list after rename
                 cursor.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name")
                 tables = [row[0] for row in cursor.fetchall()]
             except Exception as e:
-                # Make inline rename error bold green to match notifications
-                st.markdown(f"<span style='color:#198754;font-weight:bold;'>Rename error: {e}</span>", unsafe_allow_html=True)
+                bold_green(f"Rename error: {e}")
 
     try:
         cursor.execute(f"SELECT * FROM '{table}' LIMIT 1000")
@@ -200,7 +202,7 @@ def show(conn):
                                                                                 "1": True, "0": False})
                     else:
                         df[dtype_col] = df[dtype_col].astype(dtype_map[dtype_type], errors="ignore")
-                    st.success(f"Changed `{dtype_col}` to {dtype_type}")
+                    bold_green(f"Changed `{dtype_col}` to {dtype_type}")
                 except Exception as e:
                     st.error(f"Datatype change error: {e}")
 
@@ -239,9 +241,9 @@ def show(conn):
             empty_cols = [c for c in tmp.columns if tmp[c].isna().all()]
             if empty_cols:
                 cleaned_df.drop(columns=empty_cols, inplace=True)
-                st.success(f"Dropped empty columns: {', '.join(empty_cols)}")
+                bold_green(f"Dropped empty columns: {', '.join(empty_cols)}")
             else:
-                st.info("No empty columns to drop.")
+                bold_green("No empty columns to drop.")
         # --- Column/Row Selection Section ---
         with st.expander("🗑️ Drop Columns or Filter Rows", expanded=False):
             st.markdown("<span style='color:black;font-weight:bold;'>Remove specific columns or rows from dataset</span>", unsafe_allow_html=True)
@@ -264,9 +266,9 @@ def show(conn):
                             cleaned_df = cleaned_df[remaining_columns].copy()
                             
                             dropped_count = orig_cols - cleaned_df.shape[1]
-                            st.success(f"Dropped {dropped_count} columns: {', '.join(columns_to_drop)}")
+                            bold_green(f"Dropped {dropped_count} columns: {', '.join(columns_to_drop)}")
                         except Exception as e:
-                            st.error(f"Error dropping columns: {e}")
+                            bold_green(f"Error dropping columns: {e}")
             
             # Use a Streamlit divider instead of HTML hr tag
             st.markdown("---")
@@ -327,14 +329,14 @@ def show(conn):
                     # Show results
                     filtered_rows = len(cleaned_df)
                     removed_rows = orig_rows - filtered_rows
-                    st.success(f"Filter applied: Kept {filtered_rows} rows, removed {removed_rows} rows")
+                    bold_green(f"Filter applied: Kept {filtered_rows} rows, removed {removed_rows} rows")
                 except Exception as e:
-                    st.error(f"Error applying filter: {e}")
+                    bold_green(f"Error applying filter: {e}")
             
             # Option to reset all filters
             if st.button("Reset to Original Data", key="reset_filters"):
                 cleaned_df = df.copy()
-                st.success("Reset to original data. All filters and transformations cleared.")
+                bold_green("Reset to original data. All filters and transformations cleared.")
 
         # --- Column Rename/Edit Section ---
         with st.expander("✏️ Rename or Edit Columns", expanded=False):
@@ -359,9 +361,9 @@ def show(conn):
                                 col_mapping = {col_to_rename: new_col_name}
                                 # Apply rename to the cleaned dataframe
                                 cleaned_df = cleaned_df.rename(columns=col_mapping)
-                                st.success(f"Column '{col_to_rename}' renamed to '{new_col_name}'")
+                                bold_green(f"Column '{col_to_rename}' renamed to '{new_col_name}'")
                             except Exception as e:
-                                st.error(f"Error renaming column: {e}")
+                                bold_green(f"Error renaming column: {e}")
             
             # Batch column renaming option with black text
             st.markdown("---")
@@ -397,9 +399,9 @@ def show(conn):
                 if rename_map:
                     cleaned_df = cleaned_df.rename(columns=rename_map)
                     renamed_cols = list(rename_map.keys())
-                    st.success(f"Renamed {len(renamed_cols)} columns")
+                    bold_green(f"Renamed {len(renamed_cols)} columns")
                 else:
-                    st.info("No columns needed renaming")
+                    bold_green("No columns needed renaming")
 
         # Comment out the auto-rename line since we now have user controls for it
         # cleaned_df.columns = [c.strip().lower().replace(' ', '_') for c in cleaned_df.columns]
@@ -427,7 +429,7 @@ def show(conn):
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         cleaned_path = os.path.join(files_dir, f"{table}_cleaned_{timestamp}.csv")
         cleaned_df.to_csv(cleaned_path, index=False)
-        st.success(f"Cleaned CSV saved to My Projects.")
+        bold_green("Cleaned CSV saved to My Projects.")
 
         # Store the cleaned DataFrame in session state to make it available to other modules
         st.session_state.cleaned_df = cleaned_df.copy()
@@ -445,9 +447,9 @@ def show(conn):
                 try:
                     cursor.execute(f"UPDATE '{table}' SET \"{update_col}\"=? WHERE \"{update_col}\"=?", (update_new, update_old))
                     conn.commit()
-                    st.success(f"Updated `{update_col}` from '{update_old}' to '{update_new}'")
+                    bold_green(f"Updated `{update_col}` from '{update_old}' to '{update_new}'")
                 except Exception as e:
-                    st.error(f"Update error: {e}")
+                    bold_green(f"Update error: {e}")
 
         with st.expander("Delete Rows", expanded=False):
             st.markdown("Delete rows in a column for matching values.")
@@ -460,9 +462,9 @@ def show(conn):
                 try:
                     cursor.execute(f"DELETE FROM '{table}' WHERE \"{delete_col}\"=?", (delete_val,))
                     conn.commit()
-                    st.success(f"Deleted rows where `{delete_col}` = '{delete_val}'")
+                    bold_green(f"Deleted rows where `{delete_col}` = '{delete_val}'")
                 except Exception as e:
-                    st.error(f"Delete error: {e}")
+                    bold_green(f"Delete error: {e}")
 
         # Navigation buttons (side panel logic remains)
         col_back, col_next = st.columns([1, 1], gap="small")
@@ -471,9 +473,7 @@ def show(conn):
                 navigate_to("Preview & Audit")
         with col_next:
             if st.button("Next →"):
-                # Ensure the cleaned DataFrame is in session state before navigating
                 st.session_state.cleaned_df = cleaned_df.copy()
                 navigate_to("Analyst")
-
     except Exception as e:
-        st.error(f"Error loading or cleaning data: {e}")
+        bold_green(f"Error loading or cleaning data: {e}")

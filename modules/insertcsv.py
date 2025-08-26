@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 from utils import navigate_to
 
+def bold_green(msg):
+    st.markdown(f"<span style='font-weight:bold;color:#198754;'>{msg}</span>", unsafe_allow_html=True)
+
 def show(conn):
     st.subheader("📤 Insert CSV to Database")
 
@@ -20,7 +23,7 @@ def show(conn):
     # Step 1: Upload CSV
     uploaded_file = st.file_uploader("Upload CSV file", type=["csv"])
     if not uploaded_file:
-        st.info("Please upload a CSV file to begin.")
+        bold_green("Please upload a CSV file to begin.")
         if st.button("← Back"):
             navigate_to("Navigator")
         return
@@ -68,7 +71,7 @@ def show(conn):
                 values_sql = ", ".join(values)
                 cursor.execute(f"INSERT INTO '{table_name}' VALUES ({values_sql})")
             conn.commit()
-            st.success(f"CSV inserted into `{table_name}` successfully!")
+            bold_green(f"CSV inserted into `{table_name}` successfully!")
             # Save uploaded CSV to my_projects/files
             import os
             from datetime import datetime
@@ -77,9 +80,9 @@ def show(conn):
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             csv_path = os.path.join(files_dir, f"{table_name}_uploaded_{timestamp}.csv")
             df.to_csv(csv_path, index=False)
-            st.success(f"Uploaded CSV saved to My Projects.")
+            bold_green("Uploaded CSV saved to My Projects.")
         except Exception as e:
-            st.error(f"Error inserting CSV: {e}")
+            bold_green(f"Error inserting CSV: {e}")
 
     if st.button("← Back"):
         navigate_to("Navigator")
